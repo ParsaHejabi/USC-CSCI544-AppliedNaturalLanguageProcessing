@@ -384,3 +384,5 @@ $RECYCLE.BIN/
 data
 op_spam_training_data
 my_nbclassify.py
+nbmodel.txt
+nboutput.txt

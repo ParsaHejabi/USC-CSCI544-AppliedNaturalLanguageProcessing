@@ -76,6 +76,9 @@ if __name__ == "__main__":
             f_classifier_result = get_max_variable(truthful_positive_prob, truthful_negative_prob,
                                                    deceptive_positive_prob, deceptive_negative_prob)
 
+            f_classifier_1_result = f_classifier_result.split('_')[0]
+            f_classifier_2_result = f_classifier_result.split('_')[1]
+
             # append b_classifier_1 and b_classifier_2 results to the nboutput.txt file in the format of
             # 'b_classifier_1_result b_classifier_2_result' and path of review_file
             with open('nboutput.txt', 'a') as output_file:

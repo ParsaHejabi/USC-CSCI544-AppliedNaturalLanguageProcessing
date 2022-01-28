@@ -1,8 +1,24 @@
-import sys
-from glob import glob
 import os
 import re
 import string
+import sys
+from glob import glob
+
+stopwords = ['itself', 'if', 'myself', 'nor', 're', 'and', "haven't", 'most', "hasn't", 'mustn', 'as', 'your',
+             "mustn't", 'a', "that'll", 'in', 'not', 'wouldn', "you're", 'm', 'shouldn', "aren't", 'than', 'few',
+             'during', "couldn't", 'its', 'out', 'didn', 'i', 'or', 'herself', 'because', 'd', 'hadn', 'be', 'now',
+             'their', 've', 'these', 'should', 'more', 'aren', 'at', "needn't", 'who', 'won', 'but', 'me', 'ain',
+             's', 'off', 'our', 'by', 'of', 'those', 'him', 'her', "it's", 'has', "mightn't", 'she', 'between',
+             'had', "wasn't", 'wasn', 'above', 'we', 'until', 'what', "she's", 'that', 'about', 'hasn', 'you',
+             'very', 'why', 'some', 'himself', 'theirs', 'such', 'yourselves', 'with', 'ma', "wouldn't", "won't",
+             'yourself', 'too', 'shan', "didn't", 'doing', 'they', "weren't", "hadn't", 'into', 'below', 'both',
+             'before', 'over', 'whom', "should've", 'were', 'themselves', 'are', "you'd", 'weren', 'then', 'where',
+             'he', 'here', 'through', 'can', 'own', 'to', 'down', 'does', 'which', 'only', 'how', 'the', 'having',
+             'have', 'was', 'up', 'll', "isn't", 'this', 'while', 'them', 'my', "shan't", "you'll", "don't", 'when',
+             'same', 'ours', 'been', 'once', 'needn', 'do', 'haven', 'from', 'after', 'y', 'being', 'will', 'other',
+             'against', 'ourselves', 'there', 'mightn', 'for', 'an', 'it', 'did', 'o', 'just', 'each', "doesn't",
+             'am', 'no', 'hers', 'is', 'couldn', 'yours', 'on', 'don', "you've", 'further', 'again', 'so', 'his',
+             "shouldn't", 'under', 'all', 'isn', 'doesn', 't', 'any', 'room', 'hotel']
 
 
 def preprocess(text):
@@ -15,8 +31,9 @@ def preprocess(text):
     text = re.sub(r'\s+', ' ', text)
     text = re.sub(r'\d+', '', text)
     text = text.translate(str.maketrans('', '', string.punctuation))
-    if len(text) <= 3:
-        return None
+    tokens_without_sw = [word for word in text.split() if not word in stopwords]
+    text = ' '.join(tokens_without_sw)
+    text = re.sub(r'\b\w{1,3}\b', '', text)
     return text
 
 
@@ -116,6 +133,8 @@ if __name__ == "__main__":
                 f_classifier_priors['deceptive_positive'] + b)
         probs[(word, 'deceptive_negative')] = (probs[(word, 'deceptive_negative')] + 1) / (
                 f_classifier_priors['deceptive_negative'] + b)
+
+    # print(sorted(probs.items(), key=lambda x: x[1], reverse=True)[:20])
 
     with open('nbmodel.txt', 'w') as f:
         f.truncate(0)
