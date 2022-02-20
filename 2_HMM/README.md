@@ -1,4 +1,5 @@
-#Programs
+# Programs
+
 You will write two programs in Python 3 (Python 2 has been deprecated): `hmmlearn.py` will learn a hidden Markov model from the training data, and `hmmdecode.py` will use the model to tag new data.
 The learning program will be invoked in the following way:
 
@@ -17,7 +18,7 @@ The argument is a single file containing the test data; the program will read th
 
 The accuracy of your tagger is determined by a scoring script which compares the output of your tagger to a reference tagged text. Note that the tagged output file `hmmoutput.txt` must match line for line and word for word with the input to `hmmdecode.py`. A discrepancy in the number of lines or in the number of words on corresponding lines will cause the scoring script to fail.
 
-#Things to consider
+# Things to consider
 
 - **Tags.** Each language has a different tagset; the surprise language will have some tags that do not exist in the Italian and Japanese data. You must therefore build your tag sets from the training data, and not rely on a precompiled list of tags.
 - **Slash character.** The slash character `/` is the separator between words and tags, but it also appears within words in the text, so be very careful when separating words from tags. *Slashes never appear in the tags, so the separator is always the last slash in the word/tag sequence.*
