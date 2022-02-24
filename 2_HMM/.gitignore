@@ -380,5 +380,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,jetbrains+all,windows,macos,linux,python
+hmmmodel.txt
+hmmoutput.txt
 hmm-training-data.zip
 hmm-training-data
