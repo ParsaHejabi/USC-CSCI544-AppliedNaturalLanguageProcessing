@@ -65,7 +65,7 @@ if __name__ == '__main__':
                 tags_dict[tag] += 1
     assert ('START', 'END') not in transition_dict.keys()
 
-    # Transition dictionary length = number of tags ^ 2 + ('START', tags) + (tass, 'END')
+    # Transition dictionary length = number of tags ^ 2 + ('START', tags) + (tags, 'END')
     assert len(transition_dict) == (len(tags_dict) - 2) ** 2 + 2 * (len(tags_dict) - 2)
 
     for transition in transition_dict.keys():
