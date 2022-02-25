@@ -2,12 +2,14 @@ import sys
 
 
 def word_preprocess(word):
+    # return word.lower()
     return word
 
 
 if __name__ == '__main__':
     words_set = set()
     tags_dict = {'START': 0, 'END': 0}
+    tags_count = {}
     emission_dict = {}
     transition_dict = {}
     DATA_ADDRESS = sys.argv[1]
@@ -50,6 +52,9 @@ if __name__ == '__main__':
             tags_dict['START'] += 1
             tags_dict['END'] += 1
 
+    for tag in tags_dict:
+        tags_count[tag] = tags_dict[tag]
+
     # Smoothing for transitions
     for tag in tags_dict.keys():
         for tag2 in tags_dict.keys():
@@ -61,15 +66,14 @@ if __name__ == '__main__':
                 continue
             if (tag, tag2) not in transition_dict.keys():
                 transition_dict[(tag, tag2)] = 1
-                # Smoothing!
-                tags_dict[tag] += 1
+                tags_count[tag] += 1
     assert ('START', 'END') not in transition_dict.keys()
 
     # Transition dictionary length = number of tags ^ 2 + ('START', tags) + (tags, 'END')
     assert len(transition_dict) == (len(tags_dict) - 2) ** 2 + 2 * (len(tags_dict) - 2)
 
     for transition in transition_dict.keys():
-        transition_dict[transition] = transition_dict[transition] / tags_dict[transition[0]]
+        transition_dict[transition] = transition_dict[transition] / tags_count[transition[0]]
         assert transition_dict[transition] <= 1, 'Something wrong with smoothing transition probabilities'
 
     for emission in emission_dict.keys():
