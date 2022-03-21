@@ -403,8 +403,8 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,macos,windows,linux,visualstudiocode,jetbrains+all,pycharm+all
 hw3_upload.zip
-hw3_upload/dev_enc.tsv
-hw3_upload/train_enc.tsv
-hw3_upload/test_enc_unlabeled.tsv
-hw3_upload/upload_document.txt
-hw3_upload/upload_predictions.txt
+dev_enc.tsv
+train_enc.tsv
+test_enc_unlabeled.tsv
+upload_document.txt
+upload_predictions.txt
